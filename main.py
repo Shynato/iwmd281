@@ -42,6 +42,7 @@ from Librairie import Librairie
 fnac = Librairie("fnac", "36 rue de la boustifaille")
 fnac.ajouter_livre(["Harry Potter", "JK Rowling"])
 fnac.ajouter_livre(["La guerre des mondes", "HG Wells"])
+
 app = Flask(__name__)
 
 @app.route("/test")
