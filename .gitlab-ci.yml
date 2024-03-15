@@ -1,0 +1,3 @@
+job: 
+  script:
+    - ./monscript.sh # attention à bien push en +x
