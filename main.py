@@ -42,7 +42,6 @@ from Librairie import Librairie
 fnac = Librairie("fnac", "36 rue de la boustifaille")
 fnac.ajouter_livre(["Harry Potter", "JK Rowling"])
 fnac.ajouter_livre(["La guerre des mondes", "HG Wells"])
-
 app = Flask(__name__)
 
 @app.route("/test")
@@ -65,7 +64,7 @@ def afficher_nom():
 
 @app.route("/librairie/adresse")
 def afficher_adresse():
-    return jsonify(fnac.get_adresse())
+    return jsonify(fnac.get_adresse()), 200
 
 @app.route("/librairie/livres")
 def afficher_livres():
@@ -85,18 +84,8 @@ def ajouter_livre():
     fnac.ajouter_livre([livreRequest['titre'],livreRequest['auteur']])
     return "Book add with success", 204
 
-@app.route("/librairie/livres", methods=['POST'])
-def ajouter_livre():
-    livreRequest = request.get_json()
-    if livreRequest.get('titre') == None:
-        return "Error with the json, titre not found", 400
-    if livreRequest.get('auteur') == None:
-        return "Error with the json, auteur not found", 400
-    fnac.ajouter_livre([livreRequest['titre'],livreRequest['auteur']])
-    return "Book add with success", 204
-
 @app.route("/librairie/livres", methods=['DELETE'])
-def ajouter_livre():
+def supprimer_livre():
     livreRequest = request.get_json()
     if livreRequest.get('titre') == None:
         return "Error with the json, titre not found", 400
@@ -104,3 +93,4 @@ def ajouter_livre():
         return "Error with the json, auteur not found", 400
     fnac.supprimer_livre([livreRequest['titre'],livreRequest['auteur']])
     return "Book deleted with success", 204
+
