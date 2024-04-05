@@ -1,0 +1,12 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  Create-Docker-Image:
+    runs-on: ubuntu-latest
+    container: gcr.io/kaniko-project/executor:v1.9.0-debug
+    steps: 
+      - name: Register to harbor
+        run: echo "{\"auths\":{\"harbor.kakor.ovh\":{\"auth\":\"$(printf "%s:%s" "ipi" "B4teau123!" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+      - name: Build and send image to harbor 
+        run: /kaniko/executor --context "${{ GITHUB_WORKSPACE }}" --dockerfile "${{ GITHUB_WORKSPACE }}" --destination "harbor.kakor.ovh/public/demo:v1"

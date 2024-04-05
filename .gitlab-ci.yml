@@ -1,0 +1,11 @@
+build:
+  stage: build
+  image: 
+    name: gcr.io/kaniko-project/executor:v1.9.0-debug
+    entrypoint: [""]
+  script:
+    - echo "{\"auths\":{\"harbor.kakor.ovh\":{\"auth\":\"$(printf "%s:%s" "ipi" "B4teau123!" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json 
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "harbor.kakor.ovh/public/${CI_PROJECT_NAME}:${CI_COMMIT_TAG}"
