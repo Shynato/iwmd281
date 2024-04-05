@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.github",
+    "\\.github\\workflows",
+    "\\django\\demo"
+  ],
+  "SelectedNode": "\\.github\\workflows\\github-actions-demo.yml",
+  "PreviewInSolutionExplorer": false
+}
